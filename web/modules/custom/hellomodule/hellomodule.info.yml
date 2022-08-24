@@ -1,0 +1,6 @@
+name: HelloModule
+type: module
+description: The description.
+package: a module that adds a block wit
+core: 8.x
+core_version_requirement: ^8 || ^9

@@ -1,0 +1,7 @@
+hellomodule.example:
+  path: '/hellomodule/example'
+  defaults:
+    _title: 'Example'
+    _controller: '\Drupal\hellomodule\Controller\HellomoduleController::build'
+  requirements:
+    _permission: 'access content'
