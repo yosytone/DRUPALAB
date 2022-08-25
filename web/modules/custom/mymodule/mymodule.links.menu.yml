@@ -1,0 +1,4 @@
+mymodule.account:
+  title: My module Settings
+  parent: entity.user.canonical
+  route_name: mymodule.account
