@@ -28,7 +28,6 @@ class HelloBlock extends BlockBase {
 
     $service = \Drupal::service('drupalup_service.cow')->sayHello();
 
-
     return [
       '#markup' => $service,
     ];
