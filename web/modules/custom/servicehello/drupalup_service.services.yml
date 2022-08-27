@@ -1,0 +1,3 @@
+services:
+    drupalup_service.cow:
+        class: Drupal\drupalup_service\HelloServices

@@ -1,0 +1,5 @@
+name: Example Drupal Up Service
+description: An example module that declares an example service.
+package: examples
+type: module
+core_version_requirement: ^8.9 || ^9

@@ -26,8 +26,11 @@ class HelloBlock extends BlockBase {
     $request_time = \Drupal::time()->getCurrentTime();
     $date_output = date('d/m/Y', $request_time); 
 
+    $service = \Drupal::service('drupalup_service.cow')->sayHello();
+
+
     return [
-      '#markup' => 'hello, '.$name." ".$date_output,
+      '#markup' => $service,
     ];
   }
 
