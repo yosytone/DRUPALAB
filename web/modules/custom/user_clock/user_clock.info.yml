@@ -1,0 +1,5 @@
+name: User Clock
+description: Your first Drupal 9 module.
+package: my
+type: module
+core_version_requirement: ^8.9 || ^9

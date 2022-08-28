@@ -1,0 +1,10 @@
+user_clock.account:
+  path: '/user/{user}/user_clock'
+  defaults: 
+    _form: '\Drupal\user_clock\Form\UserClockForm'
+    _title: 'User Clock'
+    options:
+    _admin_route: TRUE
+  requirements:
+    _permission: 'access content'
+    user: \d+
