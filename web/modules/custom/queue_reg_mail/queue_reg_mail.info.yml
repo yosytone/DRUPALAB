@@ -1,4 +1,4 @@
-name: Queue Registration Mail
+name: Email Cron Module
 description: Cron Queuing
 package: examples
 type: module

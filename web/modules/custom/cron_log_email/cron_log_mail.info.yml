@@ -1,5 +1,0 @@
-name: 'cron log mail '
-description: 'simple cron log mail'
-package: modules_custom
-type: module
-core_version_requirement: ^8.8 || ^9

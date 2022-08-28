@@ -1,4 +1,0 @@
-administer hellomodule configuration:
-  title: 'Administer hellomodule configuration'
-  description: 'Optional description.'
-  restrict access: true
