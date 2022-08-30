@@ -1,0 +1,4 @@
+user_clock.account:
+  title: User Clock
+  parent: entity.user.canonical
+  route_name: user_clock.account

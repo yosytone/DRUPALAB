@@ -1,0 +1,5 @@
+name: Email Cron Module
+description: Cron Queuing
+package: my
+type: module
+core_version_requirement: ^8.9 || ^9
