@@ -1,0 +1,30 @@
+langcode: en
+status: true
+dependencies:
+    config:
+        - core.entity_view_mode.node.teaser
+        - field.field.node.doss.abody
+        - field.field.node.doss.apost
+        - node.type.doss
+    module:
+        - text
+        - user
+id: node.doss.teaser
+targetEntityType: node
+bundle: doss
+mode: teaser
+content:
+    abody:
+        label: hidden
+        type: text_summary_or_trimmed
+        weight: 101
+        settings:
+            trim_length: 600
+        third_party_settings: {  }
+    apost:
+        label: hidden
+        type: string
+        weight: 100
+        settings: {  }
+        third_party_settings: {  }
+hidden: {  }

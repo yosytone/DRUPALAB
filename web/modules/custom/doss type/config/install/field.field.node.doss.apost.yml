@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.apost
+    - node.type.doss
+id: node.doss.apost
+field_name: apost
+entity_type: node
+bundle: doss
+label: 'Post'
+description: 'The last name of the person.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

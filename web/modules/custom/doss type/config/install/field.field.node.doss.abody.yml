@@ -1,0 +1,21 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - field.storage.node.abody
+    - node.type.doss
+  module:
+    - text
+id: node.doss.abody
+field_name: abody
+entity_type: node
+bundle: doss
+label: 'Bio'
+description: 'More information about.'
+required: true
+translatable: true
+default_value: 'optional detail data instruction.'
+default_value_callback: ''
+settings:
+  display_summary: true
+field_type: text_with_summary

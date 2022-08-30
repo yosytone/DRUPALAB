@@ -1,0 +1,16 @@
+langcode: en
+dependencies:
+  enforced:
+    module:
+      - doss
+  module:
+    - node
+id: node.abody
+field_name: abody
+entity_type: node
+type: text_with_summary
+settings:
+  max_length: 600
+module: core
+locked: false
+cardinality: 1

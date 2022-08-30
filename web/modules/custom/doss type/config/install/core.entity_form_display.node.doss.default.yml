@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+    config:
+        - field.field.node.doss.abody
+        - field.field.node.doss.apost
+        - node.type.doss
+    module:
+        - text
+        - user
+id: node.doss.default
+targetEntityType: node
+bundle: doss
+mode: default
+content:
+    abody:
+        label: hidden
+        type: text_textarea_with_summary
+        weight: 102
+        settings: {  }
+        third_party_settings: {  }
+    apost:
+        type: string_textfield
+        weight: 101
+        settings: {  }
+        size: 30
+        placeholder: ''
+        third_party_settings: {  }
+hidden: {  }

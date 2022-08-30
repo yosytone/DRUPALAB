@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - doss
+name: 'Dossier Node'
+type: doss
+description: 'Content type that can be used to add <em>Dossier information</em> page.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true
