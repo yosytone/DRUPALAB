@@ -1,0 +1,5 @@
+name: 'Forma for 6.3 task'
+description: '6.3 task'
+package: my
+type: module
+core_version_requirement: ^8.8 || ^9

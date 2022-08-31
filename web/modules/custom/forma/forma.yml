@@ -1,0 +1,7 @@
+ex_form.example_form:
+  path: '/forma'
+  defaults:
+    _form:  '\Drupal\forma\Form\ExForm'
+    _title: 'log form'
+  requirements:
+    _permission: 'access content'

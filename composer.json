@@ -22,6 +22,7 @@
         "drupal/core-recommended": "^9.4",
         "drupal/devel": "^4.1",
         "drupal/examples": "^3.0",
+        "drupal/webform": "^6.2@beta",
         "drush/drush": "^10.6"
     },
     "conflict": {

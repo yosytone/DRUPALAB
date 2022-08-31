@@ -1,0 +1,5 @@
+name: 'remove_node '
+description: '5 task'
+package: my
+type: module
+core_version_requirement: ^8.8 || ^9
