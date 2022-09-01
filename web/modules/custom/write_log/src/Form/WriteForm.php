@@ -9,34 +9,52 @@ use Drupal\Core\Render\Element\Checkboxes;
 
 class WriteForm extends FormBase {
 
-    protected $values = [
-        'checkboxes' => [
-            '0' => 'checkbox1',
-        ],
+  public function getFormId() {
+    return 'reservation_form';
+  }
+
+  public function buildForm(array $form, FormStateInterface $form_state) {
+    $form['biography'] = [
+      '#type' => 'textarea',
+      '#title' => t(' Ваше сообщение'.$aaa),
+      '#description' => t('Оставьте свое сообщение'),
     ];
 
-  
+    $form['month'] = [
+      '#type' => 'checkbox',
+      '#tree' => TRUE,
+      '#title' => $this->t('Анонимные пользователи могут указывать контактную информацию'),
+      '#options' => [
+        $this->t('January'),
+        $this->t('February'),
+      ],
+      '#ajax' => [
+        'callback' => [$this, 'extraField'],
+        'event' => 'change',
+        'wrapper' => 'week-day',
+      ],
+    ];
 
-    public function getFormId() {
-        return 'drupal_miseries_checkboxesajax';
-    }
+    // Disable caching on this form.
+    $form_state->setCached(FALSE);
 
-    public function checkboxesAjaxCallback(array &$form, FormStateInterface $form_state) {
+    $form['week_day'] = [
+      '#type' => 'container',
+      '#tree' => TRUE,
+      '#attributes' => ['id' => 'week-day'],
+    ];
 
-      $checkbox = $form_state->getTriggeringElement();
+    if ($form_state->getUserInput()['_triggering_element_name'] == 'month') {
+      $month = $form_state->getValue('month');
 
-      $select = $form_state->getValue('select');
+      if ($month == '1') {
 
-      
-      
-      if($checkbox) {
-
-      $form['anon']['email'] = [
+      $form['week_day']['email'] = [
         '#title' => 'Email',
         '#type' => 'email',
+        '#tree' => TRUE,
         '#required' => TRUE,
         '#ajax' => [
-          'callback' => '::validateEmailAjax',
           'event' => 'change',
           'progress' => array(
             'type' => 'throbber',
@@ -45,13 +63,13 @@ class WriteForm extends FormBase {
         ],
         '#suffix' => '<div class="email-validation-message"></div>'
       ];
-
-      $form['anon']['phone'] = [
-        '#title' => 'phone',
+ 
+      $form['week_day']['phone'] = [
+        '#title' => 'Phone',
         '#type' => 'textfield',
+        '#tree' => TRUE,
         '#required' => TRUE,
         '#ajax' => [
-          'callback' => '::validateEmailAjax',
           'event' => 'change',
           'progress' => array(
             'type' => 'throbber',
@@ -60,105 +78,101 @@ class WriteForm extends FormBase {
         ],
         '#suffix' => '<div class="email-validation-message"></div>'
       ];
+
     }
-      return $form['anon'];
     }
+
     
-    public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form['submit'] = [
+      "#type" => "submit",
+      '#value' => $this->t('Отправить'),
+    ];
 
 
-      $aaa = strlen($form_state->getValue('phone'));
+    return $form;
+  }
 
-      $form['biography'] = [
-        '#type' => 'textarea',
-        '#title' => t(' Ваша Биография'.$aaa),
-        '#description' => t('Вы можите писать ЗДЕСЬ!!!'),
-      ];
-  
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $info = $form_state->getUserInput();
+    $i1 = $info['week_day']['email'];
+    $phone = $info['week_day']['phone'];
+
+    $pattern_phone = '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/';
+    if (!preg_match($pattern_phone, $phone)){
+      $form_state->setErrorByName('phone', $this->t('Формат ввода номера телефона не верен!'));
+    }
+
     
-        $form['checkboxes'] = [
-            '#type' => 'checkboxes',
-            '#title' => $this->t('Анонимные пользователи могут указывать контактную информацию',
 
-              [ '@select' => empty($form_state->getValues()) ? 
-                  $this->values['select'][key($this->values['select'])] : $form_state->getValue('select') 
-              ]
-                ),
-                
-            '#options' => $this->values['checkboxes'],
-            '#default_value' => false,
-            '#ajax' => [
-                'callback' => [$this, 'checkboxesAjaxCallback'],
-                'wrapper' => 'status',
-            ],
-        ];
-        
-        $form['status'] = [
-            '#type' => 'container',
-            '#attributes' => ['id' => 'status'],
-        ];
+  }
 
-        $form['submit'] = [
-          "#type" => "submit",
-          '#value' => $this->t('Отправить'),
-        ];
 
-        return $form;
-    }
+  public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    /**
-      * {@inheritdoc}
-      */
-    public function validateEmailAjax(array &$form, FormStateInterface $form_state) {
-      $response = new AjaxResponse();
-      
-      if (strlen($form_state->getValue('phone')) >3) {
+    $bio = $form_state->getValue('biography');
 
-        $response->addCommand(new HtmlCommand('.email-validation-message', 'This provider can lost our mail. Be care!'));
-      }
-      else {
-        # Убираем ошибку если она была и пользователь изменил почтовый адрес.
-        $response->addCommand(new HtmlCommand('.email-validation-message', ''));
-      }
-      return $response;
-    }
+    $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+    $name = $user->get('name')->value;
 
-    public function submitForm(array &$form, FormStateInterface $form_state) {
-      $info = $form_state->getUserInput();
+    $info = $form_state->getUserInput();
+    $i1 = $info['week_day']['email'];
+    $i2 = $info['week_day']['phone'];
+
+    //$pattern_phone = '^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$';
+    //if (!preg_match($pattern_phone, $i2)){
+      //$form_state->setErrorByName('email', $this->t('Формат ввода email не верен!'));
+    //}
+
+
+    $alrt = 'Спасибо за заполнение формы';
+    
       if (empty($form_state->getErrors())) {
-        \Drupal::logger('write_log')
-          ->notice(serialize($info));
-        \Drupal::messenger()->addMessage('Спасибо за заполнение формы');
+        \Drupal::messenger()->addMessage($alrt);
       } else {
         \Drupal::logger('write_log')
           ->error($form_state->getErrors());
       }
-      $key = 'admin_mail';
-      $to = \Drupal\user\Entity\User::load(1)->getEmail();
-      $langcode = 'ru';
-      $user_name= $form_state->getValue('name');
-      $user_mail= $form_state->getValue('email');
-      $mailManager = \Drupal::service('plugin.manager.mail');
-      $params = [];
-      $params['context']['from'] = \Drupal::config('system.site')->get('mail');
-      $params['context']['subject'] = 'superpowers form';
-      $params['context']['message'] ="this user has filled out a form \r\n user name is $user_name\r\n user_mail is $user_mail";
-      $send = true;
-      $result = $mailManager->mail('system', $key, $to, $langcode, $params, NULL, $send);
-      if ($result['result'] !== true) {
-        $message = t('There was a problem sending your email notification');
-        \Drupal::messenger()->addMessage($message, 'error');
-        \Drupal::logger('write_log')->error($message);
-      } else {
-
-
-        $aaa = strlen($form_state->getValue('biography'));
-        
-        $message = t('An email notification has been sent'.$a);
-        \Drupal::messenger()->addMessage($message, 'status');
-        \Drupal::logger('write_log')->notice($message);
-        \Drupal::logger('write_log')->notice($params['context']['message']);
-      }
+      
+      $logger = \Drupal::service('logger.factory'); 
+  
+    
+      if (empty($i2)) {
+  
+      // Log a message with dynamic variables.
+      $nodeType = $bio;
+      $userName = $name;
+      $logger->get($moduleName)->notice('Сообщение: "@nodeType". Автор %userName.', [
+        '@nodeType' => $nodeType,
+        '%userName' => $userName,
+      ]);
     }
+    else {
+
+      $nodeType = $bio;
+      $email = $i1;
+      $phone = $i2;
+
+      $logger->get($moduleName)->notice('Анонимное сообщение: "@nodeType". Контактные данные: "@email", "@phone"', [
+        '@nodeType' => $nodeType,
+        '@email' => $email,
+        '@phone' => $phone,
+      ]);
+
+    }
+
+     
+    
+
+  }
+
+  
+  public function extraField(array &$form, FormStateInterface $form_state) {
+    
+    return $form['week_day'];
+  }
+
+
+  
 }
 
