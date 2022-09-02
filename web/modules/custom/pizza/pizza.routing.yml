@@ -7,7 +7,7 @@ pizza.settings:
     _permission: 'administer site configuration'
 
 pizza.page:
-  path: '/funPizza'
+  path: '/Pizza'
   defaults:
     _form: '\Drupal\pizza\Form\JSForm'
     _title: 'Pizza (js version)'
@@ -15,7 +15,7 @@ pizza.page:
     _permission: 'access content'
 
 pizza.pageAJAX:
-  path: '/funPizzaAJAX'
+  path: '/PizzaAJAX'
   defaults:
     _form: '\Drupal\pizza\Form\AjaxForm'
     _title: 'Pizza (AJAX version)'
