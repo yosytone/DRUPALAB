@@ -1,0 +1,6 @@
+pizza_doJS:
+  js:
+    js/pizza.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once

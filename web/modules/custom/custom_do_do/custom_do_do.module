@@ -1,0 +1,31 @@
+<?php
+/*
+ * @file
+ * implements hook theme
+ */
+/**
+ * Implements hook_theme().
+ */
+function custom_do_do_theme($existing, $type, $theme, $path) {
+  return [
+'pizza-form'=>[
+  'render element'=> 'form',
+],
+    'current_user'=>[
+      'variables'=>[
+        'user'=>NULL
+      ],
+    ],
+  ];
+
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().for current_user
+ */
+function custom_do_do_theme_suggestions_current_user(array $variables) {
+  $variables['user'] = Drupal::currentUser()->isAuthenticated();
+  if( $variables['user']){
+    print_r(Drupal::currentUser()->id());
+  }
+}

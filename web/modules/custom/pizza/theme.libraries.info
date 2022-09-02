@@ -1,0 +1,9 @@
+global-styling:
+  version: VERSION
+  css:
+    theme:
+
+  js:
+    js/pizza.js: {}
+  dependencies:
+    - core/jquery

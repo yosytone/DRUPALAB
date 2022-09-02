@@ -97,10 +97,13 @@ class WriteForm extends FormBase {
     $info = $form_state->getUserInput();
     $i1 = $info['week_day']['email'];
     $phone = $info['week_day']['phone'];
+    $month = $form_state->getValue('month');
 
-    $pattern_phone = '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/';
-    if (!preg_match($pattern_phone, $phone)){
-      $form_state->setErrorByName('phone', $this->t('Формат ввода номера телефона не верен!'));
+    if ($month == '1') {
+      $pattern_phone = '/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/';
+      if (!preg_match($pattern_phone, $phone)){
+        $form_state->setErrorByName('phone', $this->t('Формат ввода номера телефона не верен!'.$month));
+      }
     }
 
     

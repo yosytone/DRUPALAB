@@ -1,0 +1,6 @@
+custom_do_doJS:
+  js:
+    js/custom_do_do.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once

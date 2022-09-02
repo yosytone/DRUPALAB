@@ -1,0 +1,6 @@
+.pizza-form_header{
+  display: flex;
+}
+.pizza-form_header-item{
+  flex: auto;
+}

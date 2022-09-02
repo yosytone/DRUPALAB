@@ -1,0 +1,6 @@
+name: 'pizza'
+description: '7 task'
+package: my
+type: module
+configure: pizza.settings
+core_version_requirement: ^8.8 || ^9

@@ -1,0 +1,5 @@
+name: 'custom_do_do'
+description: '7 task'
+package: modules_custom
+type: module
+core_version_requirement: ^8.8 || ^9

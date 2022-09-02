@@ -1,0 +1,12 @@
+{% set bem_block = 'pizza-form'%}
+<div{{ attributes.addClass(bem_block)}}>
+  <header class="{{ bem_block}}_header">
+    <div class="{{ bem_block}}_header-item">{{form.quantity}}</div>
+    <div class="{{ bem_block}}_header-item">{{form.district}}</div>
+    <div class="{{ bem_block}}_header-item">{{form.phone}}</div>
+    <div class="{{ bem_block}}_header-item">{{form.address}}</div>
+    <div class="{{ bem_block}}_header-item">{{form.price}}</div>
+  </header>
+</div>
+
+

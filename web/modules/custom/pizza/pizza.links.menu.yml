@@ -1,0 +1,7 @@
+pizza.settings:
+  title: 'Setting Pizza'
+  description: 'Manage settings for pizzas'
+  parent: system.admin_config_system
+  # menu_name: main
+  route_name: pizza.settings
+  weight: 1

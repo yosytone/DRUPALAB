@@ -1,0 +1,23 @@
+pizza.settings:
+  path: '/admin/config/pizza/settings'
+  defaults:
+    _form: '\Drupal\pizza\Form\SettingsForm'
+    _title: 'Administer pizza page'
+  requirements:
+    _permission: 'administer site configuration'
+
+pizza.page:
+  path: '/funPizza'
+  defaults:
+    _form: '\Drupal\pizza\Form\JSForm'
+    _title: 'Pizza (js version)'
+  requirements:
+    _permission: 'access content'
+
+pizza.pageAJAX:
+  path: '/funPizzaAJAX'
+  defaults:
+    _form: '\Drupal\pizza\Form\AjaxForm'
+    _title: 'Pizza (AJAX version)'
+  requirements:
+    _permission: 'access content'
