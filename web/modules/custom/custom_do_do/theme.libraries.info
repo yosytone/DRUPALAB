@@ -1,9 +1,0 @@
-global-styling:
-  version: VERSION
-  css:
-    theme:
-
-  js:
-    js/custom_do_do.js: {}
-  dependencies:
-    - core/jquery
