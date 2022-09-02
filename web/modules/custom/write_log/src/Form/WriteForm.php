@@ -14,11 +14,15 @@ class WriteForm extends FormBase {
   }
 
   public function buildForm(array $form, FormStateInterface $form_state) {
+
     $form['biography'] = [
       '#type' => 'textarea',
       '#title' => t(' Ваше сообщение'.$aaa),
       '#description' => t('Оставьте свое сообщение'),
     ];
+
+    if (\Drupal::currentUser()->isAnonymous()) {
+    
 
     $form['month'] = [
       '#type' => 'checkbox',
@@ -80,7 +84,8 @@ class WriteForm extends FormBase {
       ];
 
     }
-    }
+  }
+  }
 
     
 
